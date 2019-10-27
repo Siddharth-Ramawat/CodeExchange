@@ -1,0 +1,25 @@
+{
+  "name": "code-exchange",
+  "version": "1.0.0",
+  "description": "An application used to exchange codes between users",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siddharth-Ramawat/CodeExchange.git"
+  },
+  "author": "Siddharth Ramawat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Siddharth-Ramawat/CodeExchange/issues"
+  },
+  "homepage": "https://github.com/Siddharth-Ramawat/CodeExchange#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
