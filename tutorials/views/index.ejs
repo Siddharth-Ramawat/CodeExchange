@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>CodeExchange</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/public/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<h1>CodeExchange</h1>
+				<p>A simple template for telling the world when you'll launch<br />
+				your next big thing. Brought to you by <a href="localhost:3000">CodeExchange</a>.</p>
+			</header>
+
+      <!-- Uncomment this for app_17 -->
+      <!--
+      <div class="col-bg-4">
+        <h1>You Searched For : <%= data.userQuery %> </h1>
+        <% if(data.loggedIn){ %>
+          <h2>You are logged in as: <%= data.username %> </h2>
+        <% } %>
+        <ul>
+          <% data.searchResults.forEach(result => { %>
+            <li><%= result %></li>
+          <% });  %>
+        </ul>
+      </div>
+      -->
+
+		<!-- Signup Form -->
+		<form id="signup-form" method="POST" action="/">
+			<input type="email" name="email" id="email" placeholder="Email Address" />
+			<input type="password" name="password" placeholder="Password" />
+			<input type="submit" value="Sign Up" />
+		</form>
+
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">CodeExchange</a></li>
+				</ul>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/public/assets/js/main.js"></script>
+			<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
+			<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	</body>
+</html>

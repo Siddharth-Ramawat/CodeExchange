@@ -29,16 +29,16 @@
 		});
 
 	// Slideshow Background.
-		(function() {
+		(function	() {
 
 			// Settings.
 				var settings = {
 
 					// Images (in the format of 'url': 'alignment').
 						images: {
-							'images/bg01.jpg': 'center',
-							'images/bg02.jpg': 'center',
-							'images/bg03.jpg': 'center'
+							'/public/images/bg01.jpg': 'center',
+							'/public/images/bg02.jpg': 'center',
+							'/public/images/bg03.jpg': 'center'
 						},
 
 					// Delay.
@@ -105,7 +105,7 @@
 		(function() {
 
 			// Vars.
-				var $form = document.querySelectorAll('#signup-form')[0],
+				var $form = document.querySelectorAll('#signup-form'),
 					$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
 					$message;
 
@@ -123,6 +123,25 @@
 					$message.innerHTML = text;
 					$message.classList.add(type);
 					$message.classList.add('visible');
+					/*
+
+					// Uncomment this if you're executing app_14.js
+					if(type == 'success')
+					{
+						$(document).ready(() => {
+							$.ajax({
+								url : '/',
+								type : 'post',
+								contentType : 'application/json',
+								data : JSON.stringify($form.serializeArray()),
+								success : (response) => {
+									console.log("Successfully got response");
+									console.log(response);
+								}
+							});
+						});
+					}
+					*/
 
 					window.setTimeout(function() {
 						$message._hide();
@@ -151,6 +170,7 @@
 					// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
 					// but there's enough here to piece together a working AJAX submission call that does.
 						window.setTimeout(function() {
+
 
 							// Reset form.
 								$form.reset();
