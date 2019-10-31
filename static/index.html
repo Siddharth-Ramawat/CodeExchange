@@ -1,31 +1,131 @@
 <!DOCTYPE HTML>
-<!--
-	Eventually by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>Eventually by HTML5 UP</title>
+		<title>CodeExchange</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/public/assets/css/main.css" />
 	</head>
 	<body class="is-preload">
 
 		<!-- Header -->
 			<header id="header">
-				<h1>Eventually</h1>
-				<p>A simple template for telling the world when you'll launch<br />
-				your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
 			</header>
 
-		<!-- Signup Form -->
-			<form id="signup-form" method="post" action="#">
-				<input type="email" name="email" id="email" placeholder="Email Address" />
-				<input type="submit" value="Sign Up" />
-			</form>
+		<!-- Signin Form -->
 
+		<div class="registration-container">
+			<div>
+				<noscript>
+					<div id="no_js_box">
+						<h2>JavaScript is disabled in your browser.</h2>
+						<p>Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser to register for CodeExchange.</p>
+					</div>
+				</noscript>
+			<form id="login_form" action="/" method="post" novalidate="1" onsubmit="">
+				<table cellspacing="0" role="presentation">
+					<tr>
+						<td class="login_form">
+							<label for="email_id">Email or Phone</label>
+						</td>
+						<td class="login_form">
+							<label for="pass">Password</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="email" class="inputtext login_form_input_box" name="email_id" id="email"  />
+						</td>
+						<td>
+							<input type="password" class="inputtext login_form_input_box" name="pass" id="pass"  />
+						</td>
+						<td>
+							<label class="login_form_login_button uiButton uiButtonConfirm" id="loginbutton" for="u_0_4">
+								<input value="Log In" aria-label="Log In" data-testid="royal_login_button" type="submit" id="u_0_4" />
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="login_form_label_field">
+						</td>
+						<td class="login_form_label_field">
+							<div>
+								<a href="#">Forgotten account?</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+		</div>
+
+
+		<!-- Signup Form -->
+		<div class="">
+			<form class="signup-form" action="index.html" method="post">
+				<fieldset>
+					<legend id="register">Create an Account</legend>
+					<table cellspacing="0" role="presentation">
+						<tr>
+							<td class="detailsList">First Name</td>
+							<td>
+								<input id = "firstname" type="text" name="firstName" placeholder="First Name" required="yes">
+							</td>
+						</tr>
+						<tr>
+							<td class="detailsList">Last Name</td>
+							<td>
+								<input id = "lastname" type="text" name="lastName" placeholder="Last Name" >
+							</td>
+						</tr>
+						<tr>
+							 <td class="detailsList">Email&nbsp;</td>
+							 <td>
+								 <input type="text" name ="email" placeholder="abc@example.com">
+							 </td>
+						 </tr>
+						<tr>
+							<td class="detailsList">Gender</td>
+							<td>
+		            <span>
+		  						<input type="radio"  name="sex" value="female" id="female" />
+		              <label class="radio_label" for="female">Female</label>
+		            </span>
+		            <span >
+		              <input type="radio"  name="sex" value="male" id="male" />
+		              <label class="radio_label" for="male">Male</label>
+		            </span>
+		              <span >
+		                <input type="radio"  name="sex" value="other" id="other"/>
+		                <label class="radio_label" for="other">Other</label>
+		              </span>
+							</td>
+							<tr>
+								<div class="">
+									<td class="detailsList">Birthday</td>
+									<td>
+									<span>
+										<select aria-label="Day" name="birthday_day" id="days" title="Day" data-src="age"></select>
+									</span>
+									<span>
+										<select aria-label="Month" name="birthday_month" id="months" title="Month"data-src="age"></select>
+									</span>
+									<span>
+										<select aria-label="Year" name="birthday_year" id="years" title="Year"data-src="age"></select>
+									</span>
+									</td>
+								</div>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" name="submit" value="submit">
+								</td>
+							</tr>
+
+						</table>
+					</fieldset>
+			</form>
+		</div>
+
+</div>
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
@@ -35,12 +135,18 @@
 					<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+					<li>&copy; Untitled.</li>
 				</ul>
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/main.js"></script>
-
+		<script src="/public/assets/js/jquery.min.js"></script>
+		<script src="/public/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/public/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/public/assets/js/browser.min.js"></script>
+		<script src="/public/assets/js/breakpoints.min.js"></script>
+		<!-- <script src="/public/assets/js/util.js"></script> -->
+		<!-- <script src="/public/assets/js/main.js"></script> -->
+		<script src="/public/assets/js/main_1.js"></script>
 	</body>
 </html>

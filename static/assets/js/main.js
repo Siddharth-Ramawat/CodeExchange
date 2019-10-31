@@ -1,13 +1,10 @@
 /*
-	Eventually by HTML5 UP
+	Hyperspace by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-(function() {
-
-	"use strict";
-
+$(function() {
 	var	$body = document.querySelector('body');
 
 	// Methods/polyfills.
@@ -21,24 +18,47 @@
 		// window.addEventListener
 			(function(){if("addEventListener"in window)return;window.addEventListener=function(type,f){window.attachEvent("on"+type,f)}})();
 
+
+			// Dynamically load Scripts
+			function dynamicallyLoadScript(url) {
+			    var script = document.createElement("script"); //Make a script DOM node
+			    script.src = url; //Set it's src to the provided URL
+			    $body.appendChild(script); //Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+			}
+		var	$window = $('window'),
+			$sidebar = $('#sidebar');
+
+		// Breakpoints.
+			breakpoints({
+				xlarge:   [ '1281px',  '1680px' ],
+				large:    [ '981px',   '1280px' ],
+				medium:   [ '737px',   '980px'  ],
+				small:    [ '481px',   '736px'  ],
+				xsmall:   [ null,      '480px'  ]
+			});
+
+	// Hack: Enable IE flexbox workarounds.
+		if (browser.name == 'ie')
+			$body.addClass('is-ie');
+
 	// Play initial animations on page load.
-		window.addEventListener('load', function() {
+		$window.on('load', function() {
 			window.setTimeout(function() {
-				$body.classList.remove('is-preload');
+				$body.removeClass('is-preload');
 			}, 100);
 		});
 
-	// Slideshow Background.
-		(function() {
+		//Slideshow Backgrounds
+		(function	() {
 
 			// Settings.
 				var settings = {
 
 					// Images (in the format of 'url': 'alignment').
 						images: {
-							'images/bg01.jpg': 'center',
-							'images/bg02.jpg': 'center',
-							'images/bg03.jpg': 'center'
+							'/public/images/bg01.jpg': 'center',
+							'/public/images/bg02.jpg': 'center',
+							'/public/images/bg03.jpg': 'center'
 						},
 
 					// Delay.
@@ -101,71 +121,234 @@
 
 		})();
 
-	// Signup Form.
-		(function() {
 
-			// Vars.
-				var $form = document.querySelectorAll('#signup-form')[0],
-					$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
-					$message;
+	// Forms.
 
-			// Bail if addEventListener isn't supported.
-				if (!('addEventListener' in $form))
-					return;
+		// Hack: Activate non-input submits.
+			$('form').on('click', '.submit', function(event) {
 
-			// Message.
-				$message = document.createElement('span');
-					$message.classList.add('message');
-					$form.appendChild($message);
-
-				$message._show = function(type, text) {
-
-					$message.innerHTML = text;
-					$message.classList.add(type);
-					$message.classList.add('visible');
-
-					window.setTimeout(function() {
-						$message._hide();
-					}, 3000);
-
-				};
-
-				$message._hide = function() {
-					$message.classList.remove('visible');
-				};
-
-			// Events.
-			// Note: If you're *not* using AJAX, get rid of this event listener.
-				$form.addEventListener('submit', function(event) {
-
+				// Stop propagation, default.
 					event.stopPropagation();
 					event.preventDefault();
 
-					// Hide message.
-						$message._hide();
+				// Submit form.
+					$(this).parents('form').submit();
 
-					// Disable submit.
-						$submit.disabled = true;
+			});
+			(function() {
+				dynamicallyLoadScript('/public/assets/js/populate.js')
 
-					// Process form.
-					// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
-					// but there's enough here to piece together a working AJAX submission call that does.
+				// Vars.
+					var $form = document.querySelectorAll('#signup-form'),
+						$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
+						$message;
+
+					var $select = document.querySelectorAll('[data-src="age"]')
+
+
+				// Bail if addEventListener isn't supported.
+					if (!('addEventListener' in $form))
+						return;
+
+				// Message.
+					$message = document.createElement('span');
+						$message.classList.add('message');
+						$form.appendChild($message);
+
+					$message._show = function(type, text) {
+
+						$message.innerHTML = text;
+						$message.classList.add(type);
+						$message.classList.add('visible');
+
+
+
 						window.setTimeout(function() {
+							$message._hide();
+						}, 3000);
 
-							// Reset form.
-								$form.reset();
+					};
 
-							// Enable submit.
-								$submit.disabled = false;
+					$message._hide = function() {
+						$message.classList.remove('visible');
+					};
 
-							// Show message.
-								$message._show('success', 'Thank you!');
-								//$message._show('failure', 'Something went wrong. Please try again.');
+				// Events.
+				// Note: If you're *not* using AJAX, get rid of this event listener.
+					$form.addEventListener('submit', function(event) {
 
-						}, 750);
+						event.stopPropagation();
+						event.preventDefault();
+
+						// Hide message.
+							$message._hide();
+
+						// Disable submit.
+							$submit.disabled = true;
+
+						// Process form.
+						// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
+						// but there's enough here to piece together a working AJAX submission call that does.
+							window.setTimeout(function() {
+
+
+								// Reset form.
+									$form.reset();
+
+								// Enable submit.
+									$submit.disabled = false;
+
+								// Show message.
+									$message._show('success', 'Thank you!');
+									//$message._show('failure', 'Something went wrong. Please try again.');
+
+							}, 750);
+
+					});
+
+			})();
+
+	// Sidebar.
+		if ($sidebar.length > 0) {
+
+			var $sidebar_a = $sidebar.find('a');
+
+			$sidebar_a
+				.addClass('scrolly')
+				.on('click', function() {
+
+					var $this = $(this);
+
+					// External link? Bail.
+						if ($this.attr('href').charAt(0) != '#')
+							return;
+
+					// Deactivate all links.
+						$sidebar_a.removeClass('active');
+
+					// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
+						$this
+							.addClass('active')
+							.addClass('active-locked');
+
+				})
+				.each(function() {
+
+					var	$this = $(this),
+						id = $this.attr('href'),
+						$section = $(id);
+
+					// No section for this link? Bail.
+						if ($section.length < 1)
+							return;
+
+					// Scrollex.
+						$section.scrollex({
+							mode: 'middle',
+							top: '-20vh',
+							bottom: '-20vh',
+							initialize: function() {
+
+								// Deactivate section.
+									$section.addClass('inactive');
+
+							},
+							enter: function() {
+
+								// Activate section.
+									$section.removeClass('inactive');
+
+								// No locked links? Deactivate all links and activate this section's one.
+									if ($sidebar_a.filter('.active-locked').length == 0) {
+
+										$sidebar_a.removeClass('active');
+										$this.addClass('active');
+
+									}
+
+								// Otherwise, if this section's link is the one that's locked, unlock it.
+									else if ($this.hasClass('active-locked'))
+										$this.removeClass('active-locked');
+
+							}
+						});
 
 				});
 
-		})();
+		}
 
-})();
+	// Scrolly.
+		$('.scrolly').scrolly({
+			speed: 1000,
+			offset: function() {
+
+				// If <=large, >small, and sidebar is present, use its height as the offset.
+					if (breakpoints.active('<=large')
+					&&	!breakpoints.active('<=small')
+					&&	$sidebar.length > 0)
+						return $sidebar.height();
+
+				return 0;
+
+			}
+		});
+
+	// Spotlights.
+		$('.spotlights > section')
+			.scrollex({
+				mode: 'middle',
+				top: '-10vh',
+				bottom: '-10vh',
+				initialize: function() {
+
+					// Deactivate section.
+						$(this).addClass('inactive');
+
+				},
+				enter: function() {
+
+					// Activate section.
+						$(this).removeClass('inactive');
+
+				}
+			})
+			.each(function() {
+
+				var	$this = $(this),
+					$image = $this.find('.image'),
+					$img = $image.find('img'),
+					x;
+
+				// Assign image.
+					$image.css('background-image', 'url(' + $img.attr('src') + ')');
+
+				// Set background position.
+					if (x = $img.data('position'))
+						$image.css('background-position', x);
+
+				// Hide <img>.
+					$img.hide();
+
+			});
+
+	// Features.
+		$('.features')
+			.scrollex({
+				mode: 'middle',
+				top: '-20vh',
+				bottom: '-20vh',
+				initialize: function() {
+
+					// Deactivate section.
+						$(this).addClass('inactive');
+
+				},
+				enter: function() {
+
+					// Activate section.
+						$(this).removeClass('inactive');
+
+				}
+			});
+
+});

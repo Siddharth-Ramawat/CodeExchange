@@ -21,6 +21,13 @@
 		// window.addEventListener
 			(function(){if("addEventListener"in window)return;window.addEventListener=function(type,f){window.attachEvent("on"+type,f)}})();
 
+
+			// Dynamically load Scripts
+			function dynamicallyLoadScript(url) {
+			    var script = document.createElement("script"); //Make a script DOM node
+			    script.src = url; //Set it's src to the provided URL
+			    $body.appendChild(script); //Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+			}
 	// Play initial animations on page load.
 		window.addEventListener('load', function() {
 			window.setTimeout(function() {
@@ -103,11 +110,14 @@
 
 	// Signup Form.
 		(function() {
+			dynamicallyLoadScript('/public/assets/js/jquery-3.4.1.min.js')
+			dynamicallyLoadScript('/public/assets/js/populate.js')
 
 			// Vars.
 				var $form = document.querySelectorAll('#signup-form'),
 					$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
 					$message;
+
 
 			// Bail if addEventListener isn't supported.
 				if (!('addEventListener' in $form))
@@ -124,23 +134,6 @@
 					$message.classList.add(type);
 					$message.classList.add('visible');
 
-
-					// Uncomment this if you're executing app_14.js
-					// if(type == 'success')
-					// {
-					// 	$(document).ready(() => {
-					// 		$.ajax({
-					// 			url : '/',
-					// 			type : 'post',
-					// 			contentType : 'application/json',
-					// 			data : JSON.stringify($form.serializeArray()),
-					// 			success : (response) => {
-					// 				console.log("Successfully got response");
-					// 				console.log(response);
-					// 			}
-					// 		});
-					// 	});
-					// }
 
 
 					window.setTimeout(function() {
